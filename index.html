@@ -1,1 +1,279 @@
-# Learning 4D Embodied World Model
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Learning 4D Embodied World Models.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>4D Embodied World Models</title>
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/XXXXXTBDXXXXX.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <!-- <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Learning 4D Embodied World Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              ICLR 2025 Submission
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="margin-top: -4rem;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            We present a <span class="dnerf">4D Embodied World Model</span>, which takes in an image observation and
+            language instruction as input and predicts a 4D dynamic mesh predicting how the scene will change as the
+            embodied agent performs actions based on the given instructions.
+            In contrast to previously learned world models which typically generate 2D videos, our 4D model provides
+            detailed 3D information on precise configurations and shape of objects in a scene over time. This allows
+            us to effectively learn accurate inverse dynamic models for an embodied agent to execute a policy for
+            interacting with the environment.
+            To construct a dataset to train such 4D world models, we first annotate large-scale existing video
+            robotics dataset using pretrained depth and normal prediction models to construct 3D consistent 4D models
+            of each video. To efficiently learn generative models on this 4D data, we propose to train a video
+            generative model on this annotated dataset, which jointly predicts RGB-DN (RGB, Depth, and Normal) for
+            each video. We then present an algorithm to directly convert generated RGB, Depth and Normal images into
+            high-quality dynamic 4D mesh models of the world. We illustrate how this enables us to predict
+            high-quality meshes consistent across both time and space from embodied scenarios, render novel views for
+            embodied scenes, as well as construct policies that substantially outperform those from prior 2D and 3D
+            models of the world.
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Viewer Container CSS Section -->
+      <style>
+        .viewer-container {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          width: 100%;
+          margin-top: 20px;
+        }
+
+        model-viewer {
+          width: 45%;
+          height: 500px;
+        }
+      </style>
+    </div>
+  </section>
+
+  <div class="columns is-centered has-text-centered">
+    <h2 class="title is-3">Generated RGB-DN videos from the Open-Sora</h2>
+  </div>
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <!-- video -->
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-1">
+            <figure>
+              <figcaption>Video Sample 1</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Close the middle drawer</figcaption>
+              <figcaption><b>Tags:</b> Interaction with articulated objects</figcaption>
+            </figure>
+          </div>
+          <div class="item item-2">
+            <figure>
+              <figcaption>Video Sample 2</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Pick up the bottle</figcaption>
+              <figcaption><b>Tags:</b> Transparant objects</figcaption>
+            </figure>
+          </div>
+          <div class="item item-3">
+            <figure>
+              <figcaption>Video Sample 3</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Open the top drawer</figcaption>
+              <figcaption><b>Tags:</b> Interaction with articulated objects</figcaption>
+            </figure>
+          </div>
+          <div class="item item-4">
+            <figure>
+              <figcaption>Video Sample 4</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Up-right the bottle</figcaption>
+              <figcaption><b>Tags:</b> Transparant objects; Physics-related actions</figcaption>
+            </figure>
+          </div>
+          <div class="item item-5">
+            <figure>
+              <figcaption>Video Sample 6</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample5.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Pick up the apple</figcaption>
+              <figcaption><b>Tags:</b> Easy task</figcaption>
+            </figure>
+          </div>
+          <div class="item item-6">
+            <figure>
+              <figcaption>Video Sample 6</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample6.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Move coke near the chips</figcaption>
+              <figcaption><b>Tags:</b> Relation between objects</figcaption>
+            </figure>
+          </div>
+          <div class="item item-7">
+            <figure>
+              <figcaption>Video Sample 7</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample7.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Place the sponge on the table</figcaption>
+              <figcaption><b>Tags:</b> Small objects</figcaption>
+            </figure>
+          </div>
+          <div class="item item-8">
+            <figure>
+              <figcaption>Video Sample 8</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample8.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Move coke can near 7up can</figcaption>
+              <figcaption><b>Tags:</b> Relation between objects</figcaption>
+            </figure>
+          </div>
+          <div class="item item-9">
+            <figure>
+              <figcaption>Video Sample 9</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample9.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Close the bottom drawer</figcaption>
+              <figcaption><b>Tags:</b> Interaction with articulated objects</figcaption>
+            </figure>
+          </div>
+          <div class="item item-10">
+            <figure>
+              <figcaption>Video Sample 10</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample10.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Pick up the apple</figcaption>
+              <figcaption><b>Tags:</b> Easy task</figcaption>
+            </figure>
+          </div>
+          <div class="item item-11">
+            <figure>
+              <figcaption>Video Sample 11</figcaption>
+              <video controls loop playsinline autoplay muted webkit-playsinline>
+                <source src="./static/videos/sample11.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption><b>Instruction:</b> Pick the bar</figcaption>
+              <figcaption><b>Tags:</b> Small objects</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Animation</h2>
+          <h3 class="title is-4">Interpolating states</h3>
+          <div class="columns is-vcentered interpolation-panel has-text-centered is-centered">
+            <div class="column interpolation-video-column">
+              <div id="interpolation-image-wrapper">
+                Loading...
+              </div>
+              <p>Generated Images</p>
+            </div>
+            <div class="column interpolation-video-column">
+              <model-viewer id="model-viewer" src="" ar style="width: 100%; max-height: 256px;"
+                environment-image=" https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+                interpolation-decay="1000"></model-viewer>
+              <p>Generated Meshes</p>
+            </div>
+            <script>
+              (() => {
+                const modelViewer = document.querySelector('#model-viewer');
+                modelViewer.cameraOrbit = '0deg 100deg 0m';
+                const orbitCycle = [
+                  '0deg 100deg 0m',
+                  '-60deg 65deg 1m',
+                  '60deg 65deg 1m',
+                ];
+                setInterval(() => {
+                  const currentOrbitIndex = orbitCycle.indexOf(modelViewer.cameraOrbit);
+                  modelViewer.cameraOrbit =
+                    orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+                }, 3000);
+              })();
+            </script>
+          </div>
+          <input class="slider is-fullwidth is-large is-info" id="model-slider" step="1" min="0" max="15" value="15"
+            type="range">
+        </div>
+      </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            Borrow the code from <a href="https://github.com/nerfies/nerfies.github.io">here</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
