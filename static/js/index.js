@@ -77,6 +77,71 @@ function setModel2(index) {
   modelViewer.src = modelFiles2[index];
 }
 
+// ====== INTERPOLATION for stacked images ======
+var INTERP_BASE3 = "./static/interpolation/sample3";
+var NUM_INTERP_FRAMES3 = 9;
+var interp_images3 = [];
+function preloadInterpolationImages3() {
+  for (var i = 0; i < NUM_INTERP_FRAMES3; i++) {
+    var path = INTERP_BASE3 + '/' + String(i).padStart(6, '0') + '.png';
+    interp_images3[i] = new Image();
+    interp_images3[i].src = path;
+  }
+}
+function setInterpolationImage3(i) {
+  var image = interp_images3[i];
+  image.ondragstart = function () { return false; };
+  image.oncontextmenu = function () { return false; };
+  $('#interpolation-image-wrapper3').empty().append(image);
+}
+// ====== MODEL VIEWER ======
+const NUM_MODELS3 = 9;
+const MODEL_BASE3 = "https://4d-worldmodel.github.io/models/sample3";
+const modelFiles3 = [];
+function preloadModelFiles3() {
+  for (let i = 0; i < NUM_MODELS3; i++) {
+    const fileName = String(i).padStart(6, '0') + '.glb';
+    const filePath = `${MODEL_BASE3}/${fileName}`;
+    modelFiles3.push(filePath);
+  }
+}
+function setModel3(index) {
+  const modelViewer = document.getElementById('model-viewer3');
+  modelViewer.src = modelFiles3[index];
+}
+
+// ====== INTERPOLATION for stacked images ======
+var INTERP_BASE4 = "./static/interpolation/sample4";
+var NUM_INTERP_FRAMES4 = 21;
+var interp_images4 = [];
+function preloadInterpolationImages4() {
+  for (var i = 0; i < NUM_INTERP_FRAMES4; i++) {
+    var path = INTERP_BASE4 + '/' + String(i).padStart(6, '0') + '.png';
+    interp_images4[i] = new Image();
+    interp_images4[i].src = path;
+  }
+}
+function setInterpolationImage4(i) {
+  var image = interp_images4[i];
+  image.ondragstart = function () { return false; };
+  image.oncontextmenu = function () { return false; };
+  $('#interpolation-image-wrapper4').empty().append(image);
+}
+// ====== MODEL VIEWER ======
+const NUM_MODELS4 = 21;
+const MODEL_BASE4 = "https://4d-worldmodel.github.io/models/sample4";
+const modelFiles4 = [];
+function preloadModelFiles4() {
+  for (let i = 0; i < NUM_MODELS4; i++) {
+    const fileName = String(i).padStart(6, '0') + '.glb';
+    const filePath = `${MODEL_BASE4}/${fileName}`;
+    modelFiles4.push(filePath);
+  }
+}
+function setModel4(index) {
+  const modelViewer = document.getElementById('model-viewer4');
+  modelViewer.src = modelFiles4[index];
+}
 
 // ====== BULMA CAROUSEL ======
 $(document).ready(function () {
@@ -131,6 +196,7 @@ $(document).ready(function () {
   setModel(14);
   $('#model-slider').prop('max', NUM_MODELS - 1);
 
+
   preloadInterpolationImages2();
   $('#model-slider2').on('input', function (event) {
     setInterpolationImage2(this.value);
@@ -144,6 +210,36 @@ $(document).ready(function () {
   });
   setModel2(33);
   $('#model-slider2').prop('max', NUM_MODELS2 - 1);
+
+
+  preloadInterpolationImages3();
+  $('#model-slider3').on('input', function (event) {
+    setInterpolationImage3(this.value);
+  });
+  setInterpolationImage3(8);
+  $('#model-slider3').prop('max', NUM_INTERP_FRAMES3 - 1);
+  preloadModelFiles3();
+  $('#model-slider3').on('input', function () {
+    const index = parseInt(this.value);
+    setModel3(index);
+  });
+  setModel3(8);
+  $('#model-slider3').prop('max', NUM_MODELS3 - 1);
+
+
+  preloadInterpolationImages4();
+  $('#model-slider4').on('input', function (event) {
+    setInterpolationImage4(this.value);
+  });
+  setInterpolationImage4(20);
+  $('#model-slider4').prop('max', NUM_INTERP_FRAMES4 - 1);
+  preloadModelFiles4();
+  $('#model-slider4').on('input', function () {
+    const index = parseInt(this.value);
+    setModel4(index);
+  });
+  setModel4(20);
+  $('#model-slider4').prop('max', NUM_MODELS4 - 1);
 
   bulmaSlider.attach();
 

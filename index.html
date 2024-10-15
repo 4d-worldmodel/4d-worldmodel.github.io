@@ -293,6 +293,71 @@
           </div>
           <input class="slider is-fullwidth is-large is-info" id="model-slider2" step="1" min="0" max="34" value="34"
             type="range">
+          <h4 class="title is-5">Sample 3</h4>
+          <div class="columns is-vcentered interpolation-panel has-text-centered is-centered">
+            <div class="column interpolation-video-column">
+              <div id="interpolation-image-wrapper3">
+                Loading...
+              </div>
+              <p>Generated Images</p>
+            </div>
+            <div class="column interpolation-video-column">
+              <model-viewer id="model-viewer3" src="" ar style="width: 100%; max-height: 256px;"
+                environment-image=" https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+                interpolation-decay="1000"></model-viewer>
+              <p>Generated Meshes</p>
+            </div>
+            <script>
+              (() => {
+                const modelViewer = document.querySelector('#model-viewer3');
+                modelViewer.cameraOrbit = '45deg 72deg 1m';
+                const orbitCycle = [
+                  '45deg 72deg 1m',
+                  '-45deg 72deg 1m',
+                ];
+                setInterval(() => {
+                  const currentOrbitIndex = orbitCycle.indexOf(modelViewer.cameraOrbit);
+                  modelViewer.cameraOrbit =
+                    orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+                }, 3000);
+              })();
+            </script>
+          </div>
+          <input class="slider is-fullwidth is-large is-info" id="model-slider3" step="1" min="0" max="9" value="9"
+            type="range">
+          <h4 class="title is-5">Sample 4</h4>
+          <div class="columns is-vcentered interpolation-panel has-text-centered is-centered">
+            <div class="column interpolation-video-column">
+              <div id="interpolation-image-wrapper4">
+                Loading...
+              </div>
+              <p>Collected Images</p>
+            </div>
+            <div class="column interpolation-video-column">
+              <model-viewer id="model-viewer4" src="" ar style="width: 100%; max-height: 320px;"
+                environment-image=" https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+                interpolation-decay="1000"></model-viewer>
+              <p>Generated Meshes</p>
+            </div>
+            <script>
+              (() => {
+                const modelViewer = document.querySelector('#model-viewer4');
+                modelViewer.cameraOrbit = '0deg 120deg 2m';
+                const orbitCycle = [
+                  '0deg 120deg 2m',
+                  '75deg 65deg 1m',
+                  '-75deg 65deg 1m',
+                ];
+                setInterval(() => {
+                  const currentOrbitIndex = orbitCycle.indexOf(modelViewer.cameraOrbit);
+                  modelViewer.cameraOrbit =
+                    orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+                }, 3000);
+              })();
+            </script>
+          </div>
+          <input class="slider is-fullwidth is-large is-info" id="model-slider4" step="1" min="0" max="21" value="21"
+            type="range">
         </div>
       </div>
   </section>
