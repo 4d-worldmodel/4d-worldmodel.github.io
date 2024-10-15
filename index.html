@@ -224,8 +224,10 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Animation</h2>
-          <h3 class="title is-4">Interpolating states</h3>
+          <h2 class="title is-3">Animation of the generated 4D meshes</h2>
+          <p>Adjusting the slider will animate the 4D meshes and reference images. Note: ensure all meshes are fully
+            loaded before inspecting the details.</p>
+          <h4 class="title is-5">Sample 1</h4>
           <div class="columns is-vcentered interpolation-panel has-text-centered is-centered">
             <div class="column interpolation-video-column">
               <div id="interpolation-image-wrapper">
@@ -257,6 +259,39 @@
             </script>
           </div>
           <input class="slider is-fullwidth is-large is-info" id="model-slider" step="1" min="0" max="15" value="15"
+            type="range">
+          <h4 class="title is-5">Sample 2</h4>
+          <div class="columns is-vcentered interpolation-panel has-text-centered is-centered">
+            <div class="column interpolation-video-column">
+              <div id="interpolation-image-wrapper2">
+                Loading...
+              </div>
+              <p>Collected Images</p>
+            </div>
+            <div class="column interpolation-video-column">
+              <model-viewer id="model-viewer2" src="" ar style="width: 100%; max-height: 320px;"
+                environment-image=" https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+                interpolation-decay="1000"></model-viewer>
+              <p>Generated Meshes</p>
+            </div>
+            <script>
+              (() => {
+                const modelViewer = document.querySelector('#model-viewer2');
+                modelViewer.cameraOrbit = '0deg 120deg 2m';
+                const orbitCycle = [
+                  '0deg 120deg 2m',
+                  '60deg 65deg 1m',
+                  '-100deg 65deg 1m',
+                ];
+                setInterval(() => {
+                  const currentOrbitIndex = orbitCycle.indexOf(modelViewer.cameraOrbit);
+                  modelViewer.cameraOrbit =
+                    orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+                }, 3000);
+              })();
+            </script>
+          </div>
+          <input class="slider is-fullwidth is-large is-info" id="model-slider2" step="1" min="0" max="34" value="34"
             type="range">
         </div>
       </div>
